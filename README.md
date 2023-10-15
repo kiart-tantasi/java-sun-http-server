@@ -30,3 +30,20 @@ select * from test;
 ```
 docker-compose down --volumes
 ```
+
+# Production
+
+1. Compile to .class file (bytecode)
+```
+javac app/App.java
+```
+
+2. Compile .class files to .jar file
+```
+jar -cfm App.jar manifest.txt
+```
+
+3. Start app
+```
+java -jar App.jar
+```
