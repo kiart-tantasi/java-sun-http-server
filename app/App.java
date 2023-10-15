@@ -44,9 +44,10 @@ class UserHandler implements HttpHandler {
     private int counter = 15;
 
     public UserHandler() {
-        System.out.println("constructing");
+        System.out.println("getting connection to SQL database...");
         try {
             this.connection = this.getConnection();
+            System.out.println("database connection is successful");
         } catch (SQLException ex) {
             System.out.println("UserHandler class constructor error " + ex.getMessage());
         }
@@ -57,23 +58,26 @@ class UserHandler implements HttpHandler {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "password");
     }
 
-    private void insertUser() throws SQLException {
+    private int insertUser() throws SQLException {
         final var sql = String.format("INSERT INTO test (name, age) VALUES ('Hello World', %d)", this.counter);
         final var statement = this.connection.prepareStatement(sql);
         final var rowsAffected = statement.executeUpdate();
-        System.out.println("rowsAffected: " + rowsAffected);
         System.out.println("counter: " + this.counter);
         this.counter++;
+        return rowsAffected;
     }
 
     @Override
     public void handle(HttpExchange exchange) {
         try {
-            insertUser();
-            final String response = "{\"message\": \"User is created !\"}";
+            final var rowsAffected = insertUser();
+            if (rowsAffected != 1) {
+                throw new Exception("inserting user failed !");
+            }
+            final var response = "{\"message\": \"User is created !\"}";
             exchange.getResponseHeaders().set("Content-Type", "application/json");
             exchange.sendResponseHeaders(200, response.length());
-            final OutputStream os = exchange.getResponseBody();
+            final var os = exchange.getResponseBody();
             os.write(response.getBytes());
             os.close();
         } catch (Exception ex) {
