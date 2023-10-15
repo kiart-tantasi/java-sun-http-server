@@ -33,17 +33,24 @@ docker-compose down --volumes
 
 # Production
 
-1. Compile to .class file (bytecode)
+1. In `./app/handlers/UserHandler.java`, Change `localhost:3306` to `mysql:3306`
+
+2. Build docker image
 ```
-javac app/App.java
+docker build -t app .
 ```
 
-2. Compile .class files to .jar file
+3. Run docker-compose up to start MySQL and wait until it is ready
 ```
-jar -cfm App.jar manifest.txt
+docker-compose up
 ```
 
-3. Start app
+4. Run container
 ```
-java -jar App.jar
+docker run -p 8080:8080 --network=<docker-compose-network-name> app
+```
+
+5. Check result
+```
+curl http://localhost:8080/user
 ```
