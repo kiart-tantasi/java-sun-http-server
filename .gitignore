@@ -1,5 +1,5 @@
 # TODO
 # gitignore dir "./libs/" on prod !!!
 
+*.jar
 *.class
-App.jar
