@@ -1,13 +1,18 @@
 # How to run
 
-1. start docker compose and wait for mysql to be ready
+1. Start docker compose and wait for mysql to be ready
 ```
 docker-compose up
 ```
 
-2. run Java app
+2. Compile to .class files
 ```
-java -cp .:./libs/* app/*
+javac app/App.java
+```
+
+3. Start java app
+```
+java app.App
 ```
 
 3. Try
