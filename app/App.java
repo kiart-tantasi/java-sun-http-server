@@ -6,6 +6,7 @@ import com.sun.net.httpserver.HttpServer;
 
 import app.handlers.HealthzHandler;
 import app.handlers.UserHandler;
+import util.logger.Logger;
 
 public class App {
     public static void main(String[] args) throws IOException {
@@ -18,6 +19,6 @@ public class App {
 
         server.setExecutor(null); // Use the default executor
         server.start();
-        System.out.println("Server is running on port " + port);
+        Logger.log("logger: Server is running on port " + port);
     }
 }

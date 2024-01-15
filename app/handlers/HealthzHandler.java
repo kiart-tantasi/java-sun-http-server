@@ -3,6 +3,8 @@ package app.handlers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import util.logger.Logger;
+
 public class HealthzHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) {
@@ -14,7 +16,7 @@ public class HealthzHandler implements HttpHandler {
             os.write(response.getBytes());
             os.close();
         } catch (Exception ex) {
-            System.out.println("Handler error: " + ex.getMessage());
+            Logger.log("Handler error: " + ex.getMessage());
         }
     }
 }

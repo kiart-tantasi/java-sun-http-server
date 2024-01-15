@@ -7,17 +7,19 @@ import java.sql.SQLException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import util.logger.Logger;
+
 public class UserHandler implements HttpHandler {
     private Connection connection;
     private int counter = 15;
 
     public UserHandler() {
-        System.out.println("getting connection to SQL database...");
+        Logger.log("getting connection to SQL database...");
         try {
             this.connection = this.getConnection();
-            System.out.println("database connection is successful");
+            Logger.log("database connection is successful");
         } catch (SQLException ex) {
-            System.out.println("Constructor error " + ex.getMessage());
+            Logger.log("Constructor error " + ex.getMessage());
         }
     }
 
@@ -30,7 +32,7 @@ public class UserHandler implements HttpHandler {
         final var sql = String.format("INSERT INTO test (name, age) VALUES ('Hello World', %d)", this.counter);
         final var statement = this.connection.prepareStatement(sql);
         final var rowsAffected = statement.executeUpdate();
-        System.out.println("counter: " + this.counter);
+        Logger.log("counter: " + this.counter);
         this.counter++;
         return rowsAffected;
     }
@@ -49,7 +51,7 @@ public class UserHandler implements HttpHandler {
             os.write(response.getBytes());
             os.close();
         } catch (Exception ex) {
-            System.out.println("Handler error: " + ex.getMessage());
+            Logger.log("Handler error: " + ex.getMessage());
         }
     }
 }
