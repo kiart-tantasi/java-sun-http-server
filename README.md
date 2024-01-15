@@ -12,7 +12,7 @@ javac app/App.java
 
 3. Start java app
 ```
-java app.App
+java -cp .:./libs/* app.App
 ```
 
 3. Try
