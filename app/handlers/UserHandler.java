@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import util.logger.Logger;
+import common.util.logger.Logger;
 
 public class UserHandler implements HttpHandler {
     private Connection connection;

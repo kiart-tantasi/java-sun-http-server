@@ -3,7 +3,7 @@ package app.handlers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
-import util.logger.Logger;
+import common.util.logger.Logger;
 
 public class HealthzHandler implements HttpHandler {
     @Override

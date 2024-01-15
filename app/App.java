@@ -6,7 +6,7 @@ import com.sun.net.httpserver.HttpServer;
 
 import app.handlers.HealthzHandler;
 import app.handlers.UserHandler;
-import util.logger.Logger;
+import common.util.logger.Logger;
 
 public class App {
     public static void main(String[] args) throws IOException {
